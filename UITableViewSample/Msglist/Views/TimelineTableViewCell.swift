@@ -30,6 +30,12 @@ class TimeLineTableViewCell: UITableViewCell {
         view.textColor = .gray
         return view
     }()
+    
+    lazy var separatorLine:UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray
+        return view
+    }()
 
     // MARK: -
 
@@ -58,7 +64,10 @@ class TimeLineTableViewCell: UITableViewCell {
         msgContentView.text = "消息内容"
         contentView.addSubview(msgContentView)
         
-        contentView.snp.makeConstraints({maker in
+        //space line
+        contentView.addSubview(separatorLine)
+
+        contentView.snp.makeConstraints({ maker in
             maker.edges.equalToSuperview()
             maker.height.equalTo(96)
         })
@@ -81,6 +90,13 @@ class TimeLineTableViewCell: UITableViewCell {
             ConstraintMaker.left.equalTo(self.avatarView.snp.right).offset(10)
             ConstraintMaker.right.equalToSuperview()
         })
+        
+        separatorLine.snp.makeConstraints({maker in
+            maker.height.equalTo(0.5)
+            maker.bottom.equalToSuperview()
+            maker.left.equalToSuperview().offset(60)
+            maker.right.equalToSuperview()
+        })
     }
 
     // MARK: -
@@ -88,6 +104,16 @@ class TimeLineTableViewCell: UITableViewCell {
     func setDataForViews(_ model: MsgModelProtocol, _ isHideUplineView: Bool = false, _ isHideDownView: Bool = false) {
         msgTitleView.text = model.fwj_getTitle()
         msgContentView.text = model.fwj_getContent()
+
+        if model.fwj_getMsgType() == MsgType.Type1 {
+            avatarView.image = UIImage(named: "ic_msg_fans")
+        } else if model.fwj_getMsgType() == MsgType.Type2 {
+            avatarView.image = UIImage(named: "ic_msg_soc")
+        } else if model.fwj_getMsgType() == MsgType.Type3 {
+            avatarView.image = UIImage(named: "ic_msg_fans")
+        } else if model.fwj_getMsgType() == MsgType.Type4 {
+            avatarView.image = UIImage(named: "ic_system_notify")
+        }
 
         updateUpAndDown(isHideUplineView, isHideDownView)
     }

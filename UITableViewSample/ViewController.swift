@@ -32,9 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         listTableView?.rowHeight = UITableView.automaticDimension
         listTableView?.estimatedRowHeight = 50
         listTableView?.register(TimeLineTableViewCell.self, forCellReuseIdentifier: cell_identifer)
-        listTableView?.separatorStyle = .none
-
-        listTableView?.backgroundColor = UIColor.lightGray
+        listTableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
 
         listTableView?.snp.makeConstraints({ ConstraintMaker in
             ConstraintMaker.edges.equalToSuperview()
@@ -68,10 +66,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func initData() {
         dataList = [
-            MsgModel("粉丝", "好好学中医 关注了你"),
-            MsgModel("互动消息", "David 赞了你的评论"),
-            MsgModel("xx小助手", "#一起甜蜜热舞"),
-            MsgModel("系统通知", "xx直播"),
+            MsgModel("粉丝", "好好学中医 关注了你", MsgType.Type1),
+            MsgModel("互动消息", "David 赞了你的评论", MsgType.Type2),
+            MsgModel("xx小助手", "#一起甜蜜热舞", MsgType.Type1),
+            MsgModel("系统通知", "xx直播", MsgType.Type4),
         ]
         listTableView?.reloadData()
     }
