@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-protocol MsgTimelineModelProtocol {
-    func fwj_getContentStr() -> String
-    func fwj_getTimeStr() -> String
+protocol MsgModelProtocol {
+    func fwj_getTitle() -> String
+    func fwj_getContent() -> String
 }
